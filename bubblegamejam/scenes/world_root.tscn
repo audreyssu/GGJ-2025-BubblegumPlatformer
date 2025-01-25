@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://o251yu4k7q1y" path="res://scenes/piston.tscn" id="8_mtc1a"]
 [ext_resource type="PackedScene" uid="uid://d172pyvl6rxwr" path="res://scenes/moving_platform.tscn" id="9_ws5sk"]
 [ext_resource type="PackedScene" uid="uid://bsmw61s6uuuui" path="res://scenes/pendulum.tscn" id="10_j7jao"]
-[ext_resource type="PackedScene" uid="uid://t0vugvsdqbq3" path="res://scenes/piston_hold.tscn" id="11_sur5j"]
+[ext_resource type="PackedScene" uid="uid://t0vugvsdqbq3" path="res://scenes/piston_timed.tscn" id="11_sur5j"]
 
 [node name="worldRoot" type="Node3D"]
 script = ExtResource("1_0qkg6")
@@ -48,8 +48,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87195, 1.1382, -0.227564)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79248, 0)
 moveSpeedScale = 12.98
 
-[node name="piston2" parent="." instance=ExtResource("11_sur5j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6414, 1.01573, 3.31719)
+[node name="timedPiston" parent="." instance=ExtResource("11_sur5j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.84701, 1.23199, 2.06298)
 
 [connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
 
