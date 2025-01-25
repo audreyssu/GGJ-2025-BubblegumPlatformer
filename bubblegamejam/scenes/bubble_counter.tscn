@@ -27,34 +27,15 @@ grow_vertical = 0
 layout_mode = 2
 
 [node name="Gum1" type="ProgressBar" parent="."]
-layout_mode = 2
-offset_left = 1090.0
-offset_top = 547.0
-offset_right = 1130.0
-offset_bottom = 574.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -27.0
+grow_horizontal = 0
+grow_vertical = 0
 max_value = 1.0
-show_percentage = false
-indeterminate = true
-editor_preview_indeterminate = false
-
-[node name="Gum2" type="ProgressBar" parent="."]
-layout_mode = 2
-offset_left = 1090.0
-offset_top = 578.0
-offset_right = 1130.0
-offset_bottom = 605.0
-max_value = 1.0
-show_percentage = false
-indeterminate = true
-editor_preview_indeterminate = false
-
-[node name="Gum3" type="ProgressBar" parent="."]
-layout_mode = 2
-offset_left = 1090.0
-offset_top = 609.0
-offset_right = 1130.0
-offset_bottom = 636.0
-max_value = 1.0
-show_percentage = false
-indeterminate = true
-editor_preview_indeterminate = false
+value = 1.0

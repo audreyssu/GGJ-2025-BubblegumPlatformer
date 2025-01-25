@@ -10,7 +10,6 @@ const MAX_BUBBLES:int = 3
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
 
 signal numBubblesChanged(value)
-signal playerNeeded(player)
 
 func _init() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
