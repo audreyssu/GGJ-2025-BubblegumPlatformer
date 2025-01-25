@@ -24,6 +24,9 @@ gi_mode = 0
 mesh = SubResource("CylinderMesh_1jqlk")
 surface_material_override/0 = SubResource("StandardMaterial3D_ktrhp")
 
+[node name="bubbleSpawnPoint" type="Node3D" parent="charMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.273213, -2.2839)
+
 [node name="charHead" type="MeshInstance3D" parent="charMesh"]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.00101447, 0.822655, -0.583656)
 mesh = SubResource("CapsuleMesh_kw7mr")
@@ -33,6 +36,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_cnavs")
 shape = SubResource("CylinderShape3D_udgd5")
 
 [node name="playerSoundSource" type="AudioStreamPlayer3D" parent="."]
+
+[node name="bubbleSoundSource" type="AudioStreamPlayer3D" parent="."]
 
 [node name="h" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
