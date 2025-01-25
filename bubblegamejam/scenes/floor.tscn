@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://q7bngr41leuu"]
+[gd_scene load_steps=5 format=4 uid="uid://cgqnu01p4suci"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgi2g"]
 resource_name = "WoodDark"
@@ -40,18 +40,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_g428q")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_2xk0t"]
-size = Vector3(2.03461, 0.140625, 2.03857)
+[sub_resource type="BoxShape3D" id="BoxShape3D_1svjh"]
+size = Vector3(2.02795, 0.128418, 2.03247)
 
-[node name="floorDecoration_wood" type="Node3D"]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+[node name="floor" type="StaticBody3D"]
+transform = Transform3D(0.255, 0, 0, 0, 0.255, 0, 0, 0, 0.255, 0, 0, 0)
 
 [node name="floorDecoration_wood" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_p5t47")
 skeleton = NodePath("")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000152588, 0.0449219, 0.00170898)
-shape = SubResource("BoxShape3D_2xk0t")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00128173, 0.0515136, 0.000122073)
+shape = SubResource("BoxShape3D_1svjh")
