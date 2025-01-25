@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bm5rp47i5nvt2"]
+[gd_scene load_steps=13 format=3 uid="uid://bm5rp47i5nvt2"]
 
 [ext_resource type="MeshLibrary" uid="uid://dj2htmg0rk78m" path="res://mesh.tres" id="1_gjxug"]
 [ext_resource type="PackedScene" uid="uid://dna6esfxno0ow" path="res://scenes/platform.tscn" id="3_83q51"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b6ox3dgube5pd" path="res://assets/Meshes/bookcaseWide.fbx" id="8_184o0"]
 [ext_resource type="PackedScene" uid="uid://cv3ijnrb4x4bh" path="res://scenes/player.tscn" id="9_6ki7j"]
 [ext_resource type="PackedScene" uid="uid://cox7oo3r722t3" path="res://scenes/test_floor.tscn" id="10_wdow4"]
+[ext_resource type="PackedScene" uid="uid://mrgknucoe2tv" path="res://scenes/bubble_counter.tscn" id="11_s88ii"]
+[ext_resource type="PackedScene" uid="uid://bqoo6e3w2stvg" path="res://scenes/gum_packet.tscn" id="12_hhaiy"]
 
 [node name="MainLevelDesign" type="Node3D"]
 transform = Transform3D(5.1, 0, 0, 0, 5.1, 0, 0, 0, 5.1, 0, 0, 0)
@@ -168,3 +170,10 @@ collision_layer = 2
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shadow_enabled = true
+
+[node name="Bubble_Counter" parent="." instance=ExtResource("11_s88ii")]
+
+[node name="gumPacket" parent="." instance=ExtResource("12_hhaiy")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0.00516414, -0.307807, -0.0117494)
+
+[connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]

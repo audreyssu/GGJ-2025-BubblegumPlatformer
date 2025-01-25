@@ -15,6 +15,9 @@ var speed:float = 0.0
 @export var numBubbles:int = MAX_BUBBLES
 
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
+var bubbleSound = preload("res://assets/sounds/Bubble_Spawn.mp3")
+
+var bubbleScene:PackedScene = preload("res://scenes/bubble.tscn")
 
 signal numBubblesChanged(value)
 
@@ -47,6 +50,20 @@ func jump(delta: float):
 	velocity.y = jumpPower
 	$playerSoundSource.stream = jumpSound
 	$playerSoundSource.play()
+	
+func blowBubble():
+	#Blow bubbles
+	if Input.is_action_just_pressed("p_blowbubble") and numBubbles > 0:
+		numBubbles -= 1
+		numBubblesChanged.emit(numBubbles)
+		
+		var newBubble = bubbleScene.instantiate()
+		get_tree().root.get_child(0).add_child(newBubble)
+		newBubble.global_position = $charMesh/bubbleSpawnPoint.global_position
+		#newBubble.set_scale(Vector3(0.02, 0.02, 0.02))
+		
+		$bubbleSoundSource.stream = bubbleSound
+		$bubbleSoundSource.play()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -55,11 +72,7 @@ func _physics_process(delta: float) -> void:
 	
 	rotateCameraController()
 	
-	#Blow bubbles
-	if Input.is_action_just_pressed("p_blowbubble") and numBubbles > 0:
-		#print("Spawn bubble")
-		numBubbles -= 1
-		numBubblesChanged.emit(numBubbles)
+	blowBubble()
 
 	if Input.is_action_just_pressed("p_jump"):
 		if is_on_floor():
