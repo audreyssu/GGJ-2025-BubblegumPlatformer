@@ -9,6 +9,8 @@ const MAX_BUBBLES:int = 3
 
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
 
+signal numBubblesChanged(value)
+
 func _init() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -50,6 +52,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("p_blowbubble") and numBubbles > 0:
 		print("Spawn bubble")
 		numBubbles -= 1
+		numBubblesChanged.emit(numBubbles)
 	
 	#for testing UI
 	#if Input.is_action_just_pressed("p_blowbubble") and numBubbles < 0:
