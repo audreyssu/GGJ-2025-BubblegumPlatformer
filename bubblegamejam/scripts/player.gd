@@ -7,6 +7,8 @@ const MAX_BUBBLES:int = 3
 
 @export var numBubbles:int = MAX_BUBBLES
 
+@onready var cur_checkpoint:Vector3 = position # No checkpoints at start, just go to initial spawn
+
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
 
 signal numBubblesChanged(value)
@@ -14,7 +16,6 @@ signal numBubblesChanged(value)
 func _init() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	pass
 
 func _input(event: InputEvent) -> void:
 	#Rotates the camera using the mouse
@@ -24,7 +25,6 @@ func _input(event: InputEvent) -> void:
 		$h.rotate_y(deg_to_rad(-event.screen_relative.x * Settings.sensitivity))
 		$h/v.rotate_x(deg_to_rad(-event.relative.y * Settings.sensitivity))
 		$h/v.rotation.x = clampf($h/v.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-		pass
 
 #Rotates the camera using a controller
 func rotateCameraController():
@@ -42,6 +42,11 @@ func jump():
 	$playerSoundSource.play()
 
 func _physics_process(delta: float) -> void:
+	print(cur_checkpoint)
+	
+	
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -78,6 +83,9 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, moveSpeed)
 		velocity.z = move_toward(velocity.z, 0, moveSpeed)
+	
+	if Input.is_action_just_pressed("debug_kill"):
+		killPlayer()
 
 	move_and_slide()
 
@@ -87,3 +95,6 @@ func collectGum():
 		numBubblesChanged.emit(numBubbles)
 		return true
 	return false
+
+func killPlayer():
+	self.position = cur_checkpoint

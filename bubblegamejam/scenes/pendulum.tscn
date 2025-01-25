@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bsmw61s6uuuui"]
 
-[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_3px6v"]
+[ext_resource type="Script" path="res://scripts/pendulum.gd" id="1_72e8p"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_6igka"]
 
@@ -12,23 +12,6 @@ _data = {
 "tilts": PackedFloat32Array(0)
 }
 point_count = 1
-
-[sub_resource type="Animation" id="Animation_cofhb"]
-resource_name = "moving_platform_anim"
-length = 3.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("pendulumPath/pendulumPathFollow:progress_ratio")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
 
 [sub_resource type="Animation" id="Animation_so486"]
 length = 3.0
@@ -53,7 +36,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(-2, 1),
+"transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector3(-1, 0, 0), Vector3(1, 0, 0)]
 }
@@ -65,9 +48,26 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(-0.5, 1),
+"transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector3(0, 0, -0.785398), Vector3(0, 0, 0.785398)]
+}
+
+[sub_resource type="Animation" id="Animation_cofhb"]
+resource_name = "moving_platform_anim"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pendulumPath/pendulumPathFollow:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="Animation" id="Animation_seirn"]
@@ -107,7 +107,7 @@ _data = {
 }
 
 [node name="pendulum" type="Node3D"]
-script = ExtResource("1_3px6v")
+script = ExtResource("1_72e8p")
 
 [node name="pendulumBody" type="AnimatableBody3D" parent="."]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1, 0, 0)
