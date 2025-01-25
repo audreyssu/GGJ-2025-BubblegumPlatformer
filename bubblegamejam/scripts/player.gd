@@ -2,9 +2,14 @@ extends CharacterBody3D
 
 const MAX_BUBBLES:int = 3
 
+@export_category("Movement Values")
 @export var moveSpeed:float = 5.0
 @export var jumpPower:float = 4.5
+@export var acceleration:float = 3
+@export var airAcceleration:float = 0 #Need to implement this
+@export var friction:float = 5
 
+@export_category("Misc. Values")
 @export var numBubbles:int = MAX_BUBBLES
 
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
@@ -50,7 +55,7 @@ func _physics_process(delta: float) -> void:
 	
 	#Blow bubbles
 	if Input.is_action_just_pressed("p_blowbubble") and numBubbles > 0:
-		print("Spawn bubble")
+		#print("Spawn bubble")
 		numBubbles -= 1
 		numBubblesChanged.emit(numBubbles)
 	
@@ -72,12 +77,16 @@ func _physics_process(delta: float) -> void:
 	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, $h.rotation.y)).normalized()
 	
 	if direction:
-		velocity.x = direction.x * moveSpeed
-		velocity.z = direction.z * moveSpeed
+		#velocity.x = direction.x * moveSpeed
+		#velocity.z = direction.z * moveSpeed
+		velocity.x = move_toward(velocity.x, direction.x * moveSpeed, acceleration * delta)
+		velocity.z = move_toward(velocity.z, direction.z * moveSpeed, acceleration * delta)
 		$charMesh.look_at(global_position + direction, Vector3.UP)
 	else:
-		velocity.x = move_toward(velocity.x, 0, moveSpeed)
-		velocity.z = move_toward(velocity.z, 0, moveSpeed)
+		#velocity.x = move_toward(velocity.x, 0, moveSpeed)
+		#velocity.z = move_toward(velocity.z, 0, moveSpeed)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
+		velocity.z = move_toward(velocity.z, 0, friction * delta)
 
 	move_and_slide()
 
