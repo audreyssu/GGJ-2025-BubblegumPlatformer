@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqfj6aq3lwc4w"]
+
+[ext_resource type="PackedScene" uid="uid://d172pyvl6rxwr" path="res://scenes/moving_platform.tscn" id="1_gr2jl"]
+
+[node name="testSceneRoot" type="Node3D"]
+
+[node name="movingPlatform" parent="." instance=ExtResource("1_gr2jl")]
+moveSpeedScale = 10.0
+
+[node name="platformBody" parent="movingPlatform" index="0"]
+transform = Transform3D(-0.00811513, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811513, -0.0325928, 0, -0.0651874)
+
+[node name="platformPathFollow" parent="movingPlatform/platformPath" index="0"]
+transform = Transform3D(-0.00811513, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811513, -0.0325928, 0, -0.0651874)
+progress = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92079, 1.04273, 3.42558)
+
+[editable path="movingPlatform"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfdlwn2pdenob"]
+
+[ext_resource type="Script" path="res://scripts/spikes.gd" id="1_rg380"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jdehb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hinom"]
+
+[node name="spikes" type="MeshInstance3D"]
+mesh = SubResource("CylinderMesh_jdehb")
+script = ExtResource("1_rg380")
+
+[node name="spikesArea" type="Area3D" parent="."]
+
+[node name="spikesCollision" type="CollisionShape3D" parent="spikesArea"]
+shape = SubResource("CylinderShape3D_hinom")
+
+[connection signal="body_entered" from="spikesArea" to="." method="_on_spike_collision"]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=3 uid="uid://d172pyvl6rxwr"]
+
+[ext_resource type="Script" path="res://scripts/moving_platform.gd" id="1_2hnug"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_tc5ov"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_21fuh"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="Curve3D" id="Curve3D_bbgju"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.0325928, 0, -0.0651874, 0, 0, 0, 0, 0, 0, 8, 0, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_so486"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("platformPath/platformPathFollow:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cofhb"]
+resource_name = "moving_platform_anim"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("platformPath/platformPathFollow:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxg3m"]
+_data = {
+"RESET": SubResource("Animation_so486"),
+"moving_platform_anim": SubResource("Animation_cofhb")
+}
+
+[node name="movingPlatform" type="Node3D"]
+script = ExtResource("1_2hnug")
+
+[node name="platformBody" type="AnimatableBody3D" parent="."]
+transform = Transform3D(-0.00811501, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811501, 4.40261, 0, -0.0291941)
+
+[node name="platformMesh" type="MeshInstance3D" parent="platformBody"]
+mesh = SubResource("PlaneMesh_tc5ov")
+
+[node name="platformCollisionShape" type="CollisionShape3D" parent="platformBody"]
+shape = SubResource("BoxShape3D_21fuh")
+
+[node name="platformPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_bbgju")
+
+[node name="platformPathFollow" type="PathFollow3D" parent="platformPath"]
+transform = Transform3D(-0.00811501, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811501, 4.40261, 0, -0.0291941)
+progress = 4.43528
+
+[node name="platformTransform" type="RemoteTransform3D" parent="platformPath/platformPathFollow"]
+remote_path = NodePath("../../../platformBody")
+
+[node name="platformAnimPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rxg3m")
+}
+autoplay = "moving_platform_anim"
