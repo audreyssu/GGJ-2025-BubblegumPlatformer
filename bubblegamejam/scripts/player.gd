@@ -7,6 +7,8 @@ const MAX_BUBBLES:int = 3
 
 @export var numBubbles:int = MAX_BUBBLES
 
+var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
+
 func _init() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -31,6 +33,11 @@ func rotateCameraController():
 		$h/v.rotate_x(deg_to_rad(-rotationDir.y * 3))
 		$h/v.rotation.x = clampf($h/v.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 	pass
+	
+func jump():
+	velocity.y = jumpPower
+	$playerSoundSource.stream = jumpSound
+	$playerSoundSource.play()
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -41,14 +48,22 @@ func _physics_process(delta: float) -> void:
 	
 	#Blow bubbles
 	if Input.is_action_just_pressed("p_blowbubble") and numBubbles > 0:
+		print("Spawn bubble")
 		numBubbles -= 1
 	
 	#for testing UI
 	#if Input.is_action_just_pressed("p_blowbubble") and numBubbles < 0:
 	#	numBubbles = MAX_BUBBLES
 
-	if Input.is_action_just_pressed("p_jump") and is_on_floor():
-		velocity.y = jumpPower
+	if Input.is_action_just_pressed("p_jump"):
+		if is_on_floor():
+			jump()
+		else:
+			$jumpBufferTimer.start()
+			
+	#Jump buffering
+	if is_on_floor() and $jumpBufferTimer.get_time_left() > 0:
+		jump()
 
 	var input_dir := Input.get_vector("p_left", "p_right", "p_foreward", "p_backward")
 	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, $h.rotation.y)).normalized()
@@ -56,6 +71,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * moveSpeed
 		velocity.z = direction.z * moveSpeed
+		$charMesh.look_at(global_position + direction, Vector3.UP)
 	else:
 		velocity.x = move_toward(velocity.x, 0, moveSpeed)
 		velocity.z = move_toward(velocity.z, 0, moveSpeed)
