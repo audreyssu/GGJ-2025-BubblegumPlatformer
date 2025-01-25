@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://diyvfs7cnl02p"]
+[gd_scene load_steps=9 format=3 uid="uid://diyvfs7cnl02p"]
 
 [ext_resource type="Script" path="res://scripts/world_root.gd" id="1_0qkg6"]
 [ext_resource type="PackedScene" uid="uid://cox7oo3r722t3" path="res://scenes/test_floor.tscn" id="1_cfjnq"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://mrgknucoe2tv" path="res://scenes/bubble_counter.tscn" id="4_8co3c"]
 [ext_resource type="PackedScene" uid="uid://b6buddapu6s7t" path="res://scenes/checkpoint.tscn" id="6_jdluq"]
 [ext_resource type="PackedScene" uid="uid://dldq2gdep0loy" path="res://scenes/spikes.tscn" id="7_18fcs"]
+[ext_resource type="PackedScene" uid="uid://o251yu4k7q1y" path="res://scenes/piston.tscn" id="8_mtc1a"]
 
 [node name="worldRoot" type="Node3D"]
 script = ExtResource("1_0qkg6")
@@ -35,6 +36,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44339, 0, 2.55167)
 [node name="spikes" parent="." instance=ExtResource("7_18fcs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.85668)
 
+[node name="piston" parent="." instance=ExtResource("8_mtc1a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87195, 1.1382, -0.227564)
+
+[node name="pistonPusher" parent="piston" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11402, 0.000314355, 0)
+
+[node name="pistonPathFollow" parent="piston/pistonPath" index="0"]
+transform = Transform3D(-0.000692531, 0.000297587, -0.999827, 0, 0.999827, 0.000297587, 1, 2.06088e-07, -0.000692411, -1.11402, 0.00031437, 0)
+
 [connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
 
 [editable path="checkpoint2"]
+[editable path="piston"]

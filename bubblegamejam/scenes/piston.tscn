@@ -1,0 +1,107 @@
+[gd_scene load_steps=11 format=3 uid="uid://o251yu4k7q1y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8psbl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jhc0r"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h3p8i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sh23c"]
+size = Vector3(0.25, 1.05, 1.05)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p86ps"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vvie1"]
+
+[sub_resource type="Curve3D" id="Curve3D_6f80a"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -1.11402, 0.00031437, 0, 0, 0, 0, 0, 0, 0, -0.000530958, -1.70469e-05, 0.000771068),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_wodde"]
+length = 0.001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_uqr3p"]
+resource_name = "pistonAnim"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6224"]
+_data = {
+"RESET": SubResource("Animation_wodde"),
+"pistonAnim": SubResource("Animation_uqr3p")
+}
+
+[node name="piston" type="Node3D"]
+
+[node name="pistonBase" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59859, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="pistonBase"]
+mesh = SubResource("BoxMesh_8psbl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="pistonBase"]
+shape = SubResource("BoxShape3D_jhc0r")
+
+[node name="pistonPusher" type="AnimatableBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11402, 0.00031437, 0)
+
+[node name="pusherMesh" type="MeshInstance3D" parent="pistonPusher"]
+transform = Transform3D(0.25, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)
+mesh = SubResource("BoxMesh_h3p8i")
+
+[node name="pusherCollision" type="CollisionShape3D" parent="pistonPusher"]
+shape = SubResource("BoxShape3D_sh23c")
+
+[node name="leverMesh" type="MeshInstance3D" parent="pistonPusher"]
+transform = Transform3D(-4.37114e-09, -0.6, 0, 0.1, -2.62268e-08, 0, 0, 0, 0.1, -0.515153, 0, 0)
+mesh = SubResource("CylinderMesh_p86ps")
+skeleton = NodePath("")
+
+[node name="leverCollision" type="CollisionShape3D" parent="pistonPusher"]
+shape = SubResource("CylinderShape3D_vvie1")
+
+[node name="pistonPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_6f80a")
+
+[node name="pistonPathFollow" type="PathFollow3D" parent="pistonPath"]
+transform = Transform3D(-0.000692531, 0.000297587, -0.999827, 0, 0.999827, 0.000297587, 1, 2.06088e-07, -0.000692411, -1.11402, 0.00031437, 0)
+
+[node name="pistonTransform" type="RemoteTransform3D" parent="pistonPath/pistonPathFollow"]
+remote_path = NodePath("../../../pistonPusher")
+update_rotation = false
+update_scale = false
+
+[node name="pistonAnimPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../pistonPath/pistonPathFollow/pistonTransform")
+libraries = {
+"": SubResource("AnimationLibrary_w6224")
+}
+autoplay = "pistonAnim"
