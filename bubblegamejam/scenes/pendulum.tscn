@@ -111,6 +111,7 @@ script = ExtResource("1_72e8p")
 
 [node name="pendulumBody" type="AnimatableBody3D" parent="."]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1, 0, 0)
+collision_layer = 2
 
 [node name="pendulumMesh" type="MeshInstance3D" parent="pendulumBody"]
 mesh = SubResource("CylinderMesh_6igka")

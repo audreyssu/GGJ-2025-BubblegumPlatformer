@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://diyvfs7cnl02p"]
+[gd_scene load_steps=11 format=3 uid="uid://diyvfs7cnl02p"]
 
 [ext_resource type="Script" path="res://scripts/world_root.gd" id="1_0qkg6"]
 [ext_resource type="PackedScene" uid="uid://cox7oo3r722t3" path="res://scenes/test_floor.tscn" id="1_cfjnq"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dldq2gdep0loy" path="res://scenes/spikes.tscn" id="7_18fcs"]
 [ext_resource type="PackedScene" uid="uid://o251yu4k7q1y" path="res://scenes/piston.tscn" id="8_mtc1a"]
 [ext_resource type="PackedScene" uid="uid://d172pyvl6rxwr" path="res://scenes/moving_platform.tscn" id="9_ws5sk"]
+[ext_resource type="PackedScene" uid="uid://bsmw61s6uuuui" path="res://scenes/pendulum.tscn" id="10_j7jao"]
 
 [node name="worldRoot" type="Node3D"]
 script = ExtResource("1_0qkg6")
@@ -41,6 +42,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.85668)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87195, 1.1382, -0.227564)
 
 [node name="movingPlatform" parent="." instance=ExtResource("9_ws5sk")]
+
+[node name="pendulum" parent="." instance=ExtResource("10_j7jao")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79248, 0)
 
 [connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
 
