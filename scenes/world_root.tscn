@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://diyvfs7cnl02p"]
+
+[ext_resource type="PackedScene" uid="uid://cox7oo3r722t3" path="res://scenes/test_floor.tscn" id="1_cfjnq"]
+[ext_resource type="PackedScene" uid="uid://cv3ijnrb4x4bh" path="res://scenes/player.tscn" id="2_i2nx8"]
+[ext_resource type="PackedScene" uid="uid://bqoo6e3w2stvg" path="res://scenes/gum_packet.tscn" id="3_jys0l"]
+[ext_resource type="PackedScene" uid="uid://mrgknucoe2tv" path="res://scenes/bubble_counter.tscn" id="4_8co3c"]
+
+[node name="worldRoot" type="Node3D"]
+
+[node name="TestFloor" parent="." instance=ExtResource("1_cfjnq")]
+collision_layer = 2
+
+[node name="player" parent="." instance=ExtResource("2_i2nx8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07567, 1.06571, 0.248244)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 12.4737, 0.0953839)
+shadow_enabled = true
+
+[node name="gumPacket" parent="." instance=ExtResource("3_jys0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62942, 0.205854, 0.792045)
+
+[node name="Bubble_Counter" parent="." instance=ExtResource("4_8co3c")]
+
+[connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
