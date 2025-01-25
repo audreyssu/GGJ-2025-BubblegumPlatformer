@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://diyvfs7cnl02p"]
+[gd_scene load_steps=8 format=3 uid="uid://diyvfs7cnl02p"]
 
 [ext_resource type="Script" path="res://scripts/world_root.gd" id="1_0qkg6"]
 [ext_resource type="PackedScene" uid="uid://cox7oo3r722t3" path="res://scenes/test_floor.tscn" id="1_cfjnq"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqoo6e3w2stvg" path="res://scenes/gum_packet.tscn" id="3_jys0l"]
 [ext_resource type="PackedScene" uid="uid://mrgknucoe2tv" path="res://scenes/bubble_counter.tscn" id="4_8co3c"]
 [ext_resource type="PackedScene" uid="uid://b6buddapu6s7t" path="res://scenes/checkpoint.tscn" id="6_jdluq"]
+[ext_resource type="PackedScene" uid="uid://dldq2gdep0loy" path="res://scenes/spikes.tscn" id="7_18fcs"]
 
 [node name="worldRoot" type="Node3D"]
 script = ExtResource("1_0qkg6")
@@ -30,6 +31,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44339, 0, -2.85683)
 
 [node name="checkpoint2" parent="." instance=ExtResource("6_jdluq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44339, 0, 2.55167)
+
+[node name="spikes" parent="." instance=ExtResource("7_18fcs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.85668)
 
 [connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
 

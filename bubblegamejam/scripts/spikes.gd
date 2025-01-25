@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Area3D
 
 
 func _ready():
@@ -9,5 +9,6 @@ func _process(delta):
 	pass
 
 
-func _on_spike_collision(body): # Send player back to checkpoint
-	pass 
+func _on_player_collision(body):
+	if body.is_in_group("Player"):
+		body.killPlayer()

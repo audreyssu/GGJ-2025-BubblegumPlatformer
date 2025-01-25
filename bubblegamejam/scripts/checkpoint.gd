@@ -21,7 +21,7 @@ func _on_player_collision(body):
 		body.cur_checkpoint = $respawnPoint.global_position
 		print("checkpoint set")
 	elif self.is_in_group("Active_Checkpoint"):
-		print("Already active")
+		print("this checkpoint is already active")
 	else:
 		print("checkpoint not set")
 		

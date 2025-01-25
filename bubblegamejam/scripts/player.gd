@@ -41,12 +41,7 @@ func jump():
 	$playerSoundSource.stream = jumpSound
 	$playerSoundSource.play()
 
-func _physics_process(delta: float) -> void:
-	print(cur_checkpoint)
-	
-	
-	
-	
+func _physics_process(delta: float) -> void:	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -97,4 +92,5 @@ func collectGum():
 	return false
 
 func killPlayer():
+	print("player killed")
 	self.position = cur_checkpoint
