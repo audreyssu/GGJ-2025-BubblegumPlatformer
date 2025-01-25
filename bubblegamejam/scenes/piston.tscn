@@ -63,6 +63,7 @@ _data = {
 
 [node name="pistonBase" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59859, 0, 0)
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="pistonBase"]
 mesh = SubResource("BoxMesh_8psbl")
@@ -72,6 +73,7 @@ shape = SubResource("BoxShape3D_jhc0r")
 
 [node name="pistonPusher" type="AnimatableBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.11402, 0.00031437, 0)
+collision_layer = 2
 
 [node name="pusherMesh" type="MeshInstance3D" parent="pistonPusher"]
 transform = Transform3D(0.25, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0)

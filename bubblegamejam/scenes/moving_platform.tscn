@@ -56,7 +56,8 @@ _data = {
 script = ExtResource("1_2hnug")
 
 [node name="platformBody" type="AnimatableBody3D" parent="."]
-transform = Transform3D(-0.00811501, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811501, 4.40261, 0, -0.0291941)
+transform = Transform3D(-0.00811513, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811513, 4.40261, 0, -0.0291941)
+collision_layer = 2
 
 [node name="platformMesh" type="MeshInstance3D" parent="platformBody"]
 mesh = SubResource("PlaneMesh_tc5ov")
@@ -68,8 +69,7 @@ shape = SubResource("BoxShape3D_21fuh")
 curve = SubResource("Curve3D_bbgju")
 
 [node name="platformPathFollow" type="PathFollow3D" parent="platformPath"]
-transform = Transform3D(-0.00811501, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811501, 4.40261, 0, -0.0291941)
-progress = 4.43528
+transform = Transform3D(-0.00811513, 0, -0.999967, 0, 1, 0, 0.999967, 0, -0.00811513, 4.40261, 0, -0.0291941)
 
 [node name="platformTransform" type="RemoteTransform3D" parent="platformPath/platformPathFollow"]
 remote_path = NodePath("../../../platformBody")
