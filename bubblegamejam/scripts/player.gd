@@ -79,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, moveSpeed)
 		velocity.z = move_toward(velocity.z, 0, moveSpeed)
 	
-	if Input.is_action_just_pressed("debug_kill"):
+	if Input.is_action_just_pressed("reset"):
 		killPlayer()
 
 	move_and_slide()

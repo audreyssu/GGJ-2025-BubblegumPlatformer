@@ -45,6 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87195, 1.1382, -0.227564)
 
 [node name="pendulum" parent="." instance=ExtResource("10_j7jao")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.79248, 0)
+moveSpeedScale = 12.98
 
 [connection signal="numBubblesChanged" from="player" to="Bubble_Counter" method="_on_player_num_bubbles_changed"]
 
