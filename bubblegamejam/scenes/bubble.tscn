@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://1lhioqw5w5hf"]
+
+[ext_resource type="Script" path="res://scripts/bubble.gd" id="1_ixkex"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8oept"]
+bounce = 0.9
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jpi8m"]
+radius = 0.500372
+
+[sub_resource type="SphereMesh" id="SphereMesh_hj5do"]
+
+[node name="bubble" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_8oept")
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_ixkex")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_jpi8m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_hj5do")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

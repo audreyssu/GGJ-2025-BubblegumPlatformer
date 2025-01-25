@@ -6,13 +6,13 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_udgd5"]
 
-[node name="player" type="CharacterBody3D"]
+[node name="player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_3j32x")
 
-[node name="charMesh" type="MeshInstance3D" parent="."]
+[node name="charMesh" type="MeshInstance3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CylinderMesh_1jqlk")
 
-[node name="hitbox" type="CollisionShape3D" parent="."]
+[node name="hitbox" type="CollisionShape3D" parent="." groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_udgd5")
