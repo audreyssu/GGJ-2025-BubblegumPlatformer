@@ -10,6 +10,7 @@ const MAX_BUBBLES:int = 3
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
 
 signal numBubblesChanged(value)
+signal playerNeeded(player)
 
 func _init() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -80,3 +81,10 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, moveSpeed)
 
 	move_and_slide()
+
+func collectGum():
+	if !(numBubbles + 1 > MAX_BUBBLES):
+		numBubbles += 1
+		numBubblesChanged.emit(numBubbles)
+		return true
+	return false
