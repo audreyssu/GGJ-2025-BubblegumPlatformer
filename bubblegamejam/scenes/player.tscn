@@ -7,6 +7,7 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_udgd5"]
 
 [node name="player" type="CharacterBody3D"]
+collision_mask = 2
 script = ExtResource("1_3j32x")
 
 [node name="charMesh" type="MeshInstance3D" parent="."]
@@ -16,3 +17,10 @@ mesh = SubResource("CylinderMesh_1jqlk")
 [node name="hitbox" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_udgd5")
+
+[node name="cameraPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="camera" type="Camera3D" parent="cameraPoint"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15424e-07, 0.982936, 4.92832)
+fov = 90.0
