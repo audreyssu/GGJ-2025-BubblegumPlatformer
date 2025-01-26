@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://uqy0ak7ic3h4"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_owcaq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dpgc5"]
+bg_color = Color(0.662745, 0.0745098, 0.403922, 1)
+border_width_bottom = 3
+border_color = Color(0.4, 0.0235294, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5bbvr"]
+bg_color = Color(0.882353, 0.180392, 0.552941, 1)
+border_width_bottom = 3
+border_color = Color(0.403922, 0.0235294, 0.239216, 1)
+
+[sub_resource type="Theme" id="Theme_gbpxn"]
+Button/styles/hover = SubResource("StyleBoxFlat_dpgc5")
+Button/styles/normal = SubResource("StyleBoxFlat_5bbvr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ftx68"]
+bg_color = Color(0.662745, 0.0745098, 0.403922, 1)
+border_width_bottom = 3
+border_color = Color(0.4, 0.0235294, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t36l7"]
+bg_color = Color(0.882353, 0.180392, 0.552941, 1)
+border_width_bottom = 3
+border_color = Color(0.403922, 0.0235294, 0.239216, 1)
+
+[sub_resource type="Theme" id="Theme_5btfp"]
+Button/styles/hover = SubResource("StyleBoxFlat_ftx68")
+Button/styles/normal = SubResource("StyleBoxFlat_t36l7")
+
+[sub_resource type="Theme" id="Theme_75t4o"]
+Label/colors/font_color = Color(0.511521, 0.00799384, 0.474893, 1)
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_owcaq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 450.0
+offset_top = 300.0
+offset_right = 550.0
+offset_bottom = 366.0
+scale = Vector2(2, 2)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_gbpxn")
+text = "Start"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5btfp")
+text = "Quit"
+
+[node name="titleThemePlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 1620.0
+offset_bottom = 1072.0
+mouse_filter = 2
+color = Color(0.698039, 0.698039, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 200.0
+offset_right = 487.0
+offset_bottom = 223.0
+scale = Vector2(3, 3)
+theme = SubResource("Theme_75t4o")
+text = "GUM GUM BLAST!"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
