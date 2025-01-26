@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqfj6aq3lwc4w"]
+
+[ext_resource type="PackedScene" uid="uid://bsmw61s6uuuui" path="res://scenes/pendulum.tscn" id="1_na685"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8qs63"]
+
+[sub_resource type="HeightMapShape3D" id="HeightMapShape3D_1ac04"]
+map_width = 3
+map_depth = 3
+map_data = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rr0mu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eescc"]
+
+[node name="testSceneRoot" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92079, 1.04273, 3.42558)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_8qs63")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("HeightMapShape3D_1ac04")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486997, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(0.575, 0, 0, 0, 0.575, 0, 0, 0, 0.575, 0, 0, 0)
+mesh = SubResource("SphereMesh_rr0mu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0, 0)
+shape = SubResource("SphereShape3D_eescc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0109, 1.34296, 0.972516)
+
+[node name="pendulum" parent="." instance=ExtResource("1_na685")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70305, 0.982656, 0.469451)

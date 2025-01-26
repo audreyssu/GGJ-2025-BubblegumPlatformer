@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cv3ijnrb4x4bh"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_3j32x"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jqlk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ktrhp"]
+albedo_color = Color(0.106773, 0.538965, 0.548114, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_kw7mr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cnavs"]
+albedo_color = Color(0, 0.517452, 0.51808, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_udgd5"]
+
+[node name="player" type="CharacterBody3D" groups=["Player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_mask = 6
+script = ExtResource("1_3j32x")
+
+[node name="charMesh" type="MeshInstance3D" parent="."]
+gi_mode = 0
+mesh = SubResource("CylinderMesh_1jqlk")
+surface_material_override/0 = SubResource("StandardMaterial3D_ktrhp")
+
+[node name="bubbleSpawnPoint" type="Node3D" parent="charMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.273213, -2.2839)
+
+[node name="charHead" type="MeshInstance3D" parent="charMesh"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.00101447, 0.822655, -0.583656)
+mesh = SubResource("CapsuleMesh_kw7mr")
+surface_material_override/0 = SubResource("StandardMaterial3D_cnavs")
+
+[node name="hitbox" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_udgd5")
+
+[node name="playerSoundSource" type="AudioStreamPlayer3D" parent="."]
+
+[node name="bubbleSoundSource" type="AudioStreamPlayer3D" parent="."]
+
+[node name="h" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="v" type="Node3D" parent="h"]
+
+[node name="camera" type="Camera3D" parent="h/v"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.15424e-07, 0.982936, 4.92832)
+fov = 90.0
+
+[node name="jumpBufferTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true

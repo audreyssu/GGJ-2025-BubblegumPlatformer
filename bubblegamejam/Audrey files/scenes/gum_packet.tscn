@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqoo6e3w2stvg"]
+
+[ext_resource type="PackedScene" uid="uid://cjhypy3emdcix" path="res://assets/bubble gum packet.glb" id="1_78n7s"]
+[ext_resource type="Script" path="res://scripts/gum_packet.gd" id="1_keosn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gu0tv"]
+size = Vector3(0.261719, 0.0559998, 0.484375)
+
+[node name="gumPacket" type="Area3D" groups=["Collectible"]]
+collision_layer = 4
+script = ExtResource("1_keosn")
+
+[node name="bubble gum packet" parent="." instance=ExtResource("1_78n7s")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, -0.0561473, 0, 0.16984)
+
+[node name="hitbox" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00439453, 0.00444031, -0.0175781)
+shape = SubResource("BoxShape3D_gu0tv")
+
+[node name="respawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="respawnTimer" to="." method="respawnTimerTimeout"]
