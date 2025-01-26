@@ -6,9 +6,6 @@
 export.cfg
 export_presets.cfg
 
-mesh.tres
-assets/Meshes/
-
 # Imported translations (automatically generated from CSV files)
 *.translation
 

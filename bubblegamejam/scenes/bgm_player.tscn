@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://tg8g4me6cy55"]
-
-[ext_resource type="Script" path="res://scripts/bgm_player.gd" id="1_cqp0y"]
-
-[node name="bgmPlayer" type="AudioStreamPlayer"]
-script = ExtResource("1_cqp0y")
-
-[connection signal="finished" from="." to="." method="onBGMFinished"]
