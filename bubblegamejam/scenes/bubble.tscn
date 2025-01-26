@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://b6tfw7n6isuq1"]
+[gd_scene load_steps=9 format=4 uid="uid://b6tfw7n6isuq1"]
 
 [ext_resource type="Script" path="res://scripts/bubble.gd" id="1_bh5b0"]
+[ext_resource type="AudioStream" uid="uid://c405vw02elkex" path="res://assets/sounds/Pop_sound_1.mp3" id="2_bwd7a"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_dp574"]
 
@@ -75,4 +76,8 @@ transform = Transform3D(2.08914, 0, 0, 0, 2.08914, 0, 0, 0, 2.08914, 6.22404, 0,
 mesh = SubResource("ArrayMesh_1smcs")
 skeleton = NodePath("")
 
+[node name="popSoundSource" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_bwd7a")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="popSoundSource" to="." method="_on_pop_sound_source_finished"]

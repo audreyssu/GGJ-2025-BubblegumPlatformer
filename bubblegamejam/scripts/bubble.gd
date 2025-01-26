@@ -17,7 +17,8 @@ var bounce_factor = 10
 func _process(delta: float) -> void:
 	#increase height over time and deletes itself
 	if self.position.y >= max_height:
-		self.queue_free()
+		#self.queue_free()
+		playPopSound()
 	self.position.y+= 0.002
 	pass
 
@@ -35,9 +36,22 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if change_velocity == true:
 		player_node.velocity = -state.get_contact_local_normal(collider_player_index)* bounce_factor
 		change_velocity = false
-		self.queue_free()
+		#self.queue_free()
+		playPopSound()
 		
 		
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
 	#pass # Replace with function body.
+
+func playPopSound():
+	set_contact_monitor(false)
+	set_visible(false)
+	if $popSoundSource.stream:
+		$popSoundSource.play()
+	else:
+		call_deferred("queue_free")
+
+func _on_pop_sound_source_finished() -> void:
+	call_deferred("queue_free")
+	pass # Replace with function body.
