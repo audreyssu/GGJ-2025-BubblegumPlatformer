@@ -13,6 +13,7 @@ var speed:float = 0.0
 
 @export_category("Misc. Values")
 @export var numBubbles:int = MAX_BUBBLES
+var rotateSpeed:float = 20
 
 var jumpSound = preload("res://assets/sounds/Bounce!.mp3")
 var bubbleSound = preload("res://assets/sounds/Bubble_Spawn.mp3")
@@ -85,7 +86,7 @@ func _physics_process(delta: float) -> void:
 		jump(delta)
 
 	var input_dir := Input.get_vector("p_left", "p_right", "p_foreward", "p_backward")
-	var direction = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, $h.rotation.y)).normalized()
+	var direction:Vector3 = (Vector3(input_dir.x, 0, input_dir.y).rotated(Vector3.UP, $h.rotation.y)).normalized()
 	
 	var yVel:float = velocity.y
 	velocity.y = 0
@@ -95,8 +96,11 @@ func _physics_process(delta: float) -> void:
 		velocity.z = lerp(velocity.z, direction.z * maxSpeed, acceleration)
 		
 		if is_on_floor():
+			var curRot = Quaternion($charMesh.transform.basis)
 			$charMesh.look_at(global_position + direction, Vector3.UP)
-		
+			var targRot = Quaternion($charMesh.transform.basis)
+			$charMesh.transform.basis = Basis(curRot.slerp(targRot, 0.3))
+			
 	else:
 		velocity.x = lerp(velocity.x, 0.0, friction)
 		velocity.z = lerp(velocity.z, 0.0, friction)
